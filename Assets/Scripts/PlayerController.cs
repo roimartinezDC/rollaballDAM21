@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Transactions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,7 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
         movementX = movementVector.x;
-        movementY = movementVector.y-0.7f;
+        movementY = movementVector.y;
     }
     
     void FixedUpdate()
@@ -27,5 +29,13 @@ public class PlayerController : MonoBehaviour
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
         rb.AddForce(movement * speed);
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("pickup"))
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 }

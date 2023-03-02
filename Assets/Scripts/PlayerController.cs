@@ -7,28 +7,46 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 0;
-    private Rigidbody rb;
-    private float movementX;
-    private float movementY;
-    
-    void Start()
+    [SerializeField] private float velocidadMovimiento;
+    [SerializeField] private float velocidadRotacion;
+    [SerializeField] private CharacterController characterController;
+    [SerializeField] private Transform transformPersonaje;
+    [SerializeField] private Camera camaraPersonaje;
+    public static int puntuacion;
+
+    private Vector3 movimiento;
+    private float rotacionX;
+
+    private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        puntuacion = 0;
     }
 
-    void OnMove(InputValue movementValue)
+    void MovimientoPersonaje()
     {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-        movementX = movementVector.x;
-        movementY = movementVector.y;
+        float movX = Input.GetAxis("Horizontal");
+        float movZ = Input.GetAxis("Vertical");
+
+        movimiento = transform.right * movX + transform.forward * movZ;
+        characterController.SimpleMove(movimiento * velocidadMovimiento);
+    }
+
+    void MovimientoCamara()
+    {
+        float ratonX = Input.GetAxis("Mouse X") * velocidadRotacion;
+        float ratonY = Input.GetAxis("Mouse Y") * velocidadRotacion;
+
+        rotacionX -= ratonY;
+        rotacionX = Mathf.Clamp(rotacionX, -90f, 90f);
+        
+        camaraPersonaje.transform.localRotation = Quaternion.Euler(rotacionX, 0, 0);
+        transformPersonaje.Rotate(Vector3.up * ratonX);
     }
     
-    void FixedUpdate()
+    void Update()
     {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-        rb.AddForce(movement * speed);
-        
+        MovimientoPersonaje();
+        MovimientoCamara();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,6 +54,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("pickup"))
         {
             other.gameObject.SetActive(false);
+            puntuacion++;
         }
     }
 }

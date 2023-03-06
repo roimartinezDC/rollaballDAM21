@@ -55,6 +55,9 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             puntuacion++;
+        } else if (other.gameObject.CompareTag("teleport"))
+        {
+            gameObject.transform.position = new Vector3(-3.7f, 0.5f, -14.8f);
         }
     }
 }

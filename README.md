@@ -57,3 +57,15 @@ compuerta detrás tuya que te permite ingresar a un túnel.
   * Si no has recogido por lo menos tres monedas, también te teletransporta al inicio del juego, pero 
 no abre ninguna compuerta secreta y te establece la puntuación a 0, además de volver a mostrar todas las 
 monedas que habían desaparecido.
+
+
+## Rotator.cs
+
+Este script controla la rotación de las monedas. Te permite ajustar la velocidad de rotación mediante una 
+variable serializada.
+
+
+## TextPuntuacion.cs
+
+Este script actualiza el texto de la puntuación mostrado en pantalla, está todo el rato actualizándolo, por 
+lo que cuando coges una moneda, y la variable puntuación aumenta, el texto también se actualiza.

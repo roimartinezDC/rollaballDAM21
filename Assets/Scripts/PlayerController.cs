@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,9 +27,16 @@ public class PlayerController : MonoBehaviour
     {
         float movX = Input.GetAxis("Horizontal");
         float movZ = Input.GetAxis("Vertical");
-
+        
         movimiento = transform.right * movX + transform.forward * movZ;
         characterController.SimpleMove(movimiento * velocidadMovimiento);
+        
+        
+        if (Input.GetButtonDown("Jump") && (gameObject.transform.position.y <= 1))
+        {   
+            gameObject.transform.position += new Vector3(0, 0.7f, 0);
+        }
+        
     }
 
     void MovimientoCamara()
@@ -58,6 +66,19 @@ public class PlayerController : MonoBehaviour
         } else if (other.gameObject.CompareTag("teleport"))
         {
             gameObject.transform.position = new Vector3(-3.7f, 0.5f, -14.8f);
+            if (puntuacion < 3)
+            {
+                GameObject[] monedas = GameObject.FindGameObjectsWithTag("pickup");
+                foreach(GameObject moneda in monedas) {
+                    moneda.SetActive(true);
+                }
+                puntuacion = 0;
+            }
+            else
+            {
+                GameObject muro = GameObject.FindGameObjectWithTag("falsewall");
+                muro.SetActive(false);
+            }
         }
     }
 }

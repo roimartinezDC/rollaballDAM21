@@ -25,7 +25,7 @@ Además de todo esto, este método también permite saltar al jugador, detecta s
 pulsamos la tecla espacio, y si lo hacemos eleva la posición del jugador un 0.7 en el 
 eje _"Y"_.
 
-![](.\gif\Animation1.gif)
+![movimientoYCámara](/gif/Animation1.gif)
 
 ### Control de la cámara
 
@@ -50,19 +50,19 @@ del jugador con los demás objetos del juego.
 Si el jugador interactúa con un elemento de etiqueta _"pickup"_ (que son las monedas), la moneda 
 desaparece y se suma 1 a la puntuación del jugador.
 
-![](.\gif\Animation2.gif)
+![cogerMoneda](/gif/Animation2.gif)
 
 Si resuelves el laberinto, encontrarás un círculo violeta en el suelo, es un elemento con la etiqueta
 "_teleport_", y si interactúas con él pueden pasar dos cosas:
 
   * Si has recogido al menos tres monedas antes, te teletransporta al inicio del juego, y se abre una
 compuerta detrás tuya que te permite ingresar a un túnel.
-![](.\gif\Animation4.gif)
+![fin1](/gif/Animation4.gif)
 
   * Si no has recogido por lo menos tres monedas, también te teletransporta al inicio del juego, pero 
 no abre ninguna compuerta secreta y te establece la puntuación a 0, además de volver a mostrar todas las 
 monedas que habían desaparecido.
-![](.\gif\Animation3.gif)
+![fin2](/gif/Animation3.gif)
 
 
 ## Rotator.cs
